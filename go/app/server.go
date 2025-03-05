@@ -218,8 +218,8 @@ func (s *Handlers) storeImage(image []byte) (filePath string, err error) {
 	}
 
 	// STEP 4: store the image
-	if err := os.WriteFile(filePath, image, 0644); err != nil {
-		return "", fmt.Errorf("failed to write image file: %w", err)
+	if err := StoreImage(filePath, image); err != nil {
+		return "", fmt.Errorf("failed to store image: %w", err)
 	}
 
 	// STEP 5: return the image file path
