@@ -207,13 +207,8 @@ func (s *Handlers) storeImage(image []byte) (filePath string, err error) {
 	hashStr := hex.EncodeToString(hash[:])
 
 	// STEP 2: build image file path
-	const imageDir = "images"
-	if err := os.MkdirAll(imageDir, os.ModePerm); err != nil {
-		return "", fmt.Errorf("failed to create image directory: %w", err)
-	}
-
 	fileName := fmt.Sprintf("%s.jpg", hashStr) // you can handle other extensions properly based on content-type
-	filePath = filepath.Join(imageDir, fileName)
+	filePath = filepath.Join(s.imgDirPath, fileName)
 
 	// STEP 3: check if the image already exists
 	if _, err := os.Stat(filePath); err == nil {
